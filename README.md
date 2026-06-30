@@ -5,15 +5,23 @@ UTP Marketplace es una plataforma web desarrollada para la comunidad universitar
 #Características principales
 
 +Catálogo Dinámico: Filtrado de productos por categorías (Libros, Electrónica, Proyectos, etc.) mediante parámetros de URL.
+
 +Carrito de Compras: Gestión persistente de productos mediante localStorage.
+
 +Detalle de Producto: Vista dinámica que carga información específica según el ID del producto seleccionado.
+
 +Interfaz Responsiva: Diseño moderno y limpio construido con Tailwind CSS.
+
 +Navegación Intuitiva: Menús activos que indican la ubicación del usuario.
+
+
 
 #Tecnologías utilizadas
 
 +HTML5: Estructura semántica del contenido.
+
 +Tailwind CSS: Framework de estilos para un diseño moderno y rápido.
+
 +JavaScript: Lógica de negocio, filtrado, manejo de carrito y manipulación del DOM.
 
 #Estructura del proyecto
