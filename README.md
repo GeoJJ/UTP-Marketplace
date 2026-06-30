@@ -24,17 +24,6 @@ UTP Marketplace es una plataforma web desarrollada para la comunidad universitar
 
 +JavaScript: Lógica de negocio, filtrado, manejo de carrito y manipulación del DOM.
 
-#Estructura del proyecto
-
-/
-├── css/
-│   └── main.css         # Estilos personalizados
-├── js/
-│   └── app.js           # Lógica, base de datos y funciones
-├── index.html           # Página principal
-├── catalogo.html        # Catálogo de productos
-├── producto.html        # Detalle de cada producto
-└── carrito.html         # Carrito de compras
 
 #Integrantes
 
