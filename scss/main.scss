@@ -1,0 +1,50 @@
+@import 'variables';
+@import 'mixins';
+@import 'animaciones';
+@import 'layout';
+
+
+
+body {
+  font-family: $font-main;
+  background-color: $color-light;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: $color-secondary;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .nav-logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin-left: 20px;
+
+      a {
+        color: white;
+        text-decoration: none;
+        -webkit-transition: color 0.2s;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

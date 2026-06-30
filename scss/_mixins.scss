@@ -1,0 +1,10 @@
+@mixin boton-estilo($bg-color, $text-color) {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: $bg-color;
+  color: $text-color;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+}
