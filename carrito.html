@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tu Carrito | UTP Marketplace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: { 
+            extend: { 
+              "colors": { "primary": "#82001e", "primary-container": "#a71930", "on-primary": "#ffffff", "surface": "#f8f9fb", "on-surface": "#191c1e", "outline-variant": "#e1bebe", "secondary": "#635d5a", "surface-container-lowest": "#ffffff" }, 
+              "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem" }, 
+              "spacing": { "stack-sm": "0.5rem", "margin-mobile": "1rem", "container-max": "1280px", "stack-md": "1rem", "stack-lg": "2rem", "margin-desktop": "2.5rem", "gutter": "1.5rem" } 
+            } 
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+    <nav class="bg-surface border-b border-outline-variant sticky top-0 z-50">
+        <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+            <div class="flex items-center gap-8">
+                <a class="font-display-lg text-headline-md font-bold text-primary flex items-center gap-2" href="index.html">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">school</span>
+                    <span>UTP Marketplace</span>
+                </a>
+                <div class="hidden md:flex items-center gap-6">
+                    <a class="text-secondary font-button text-button hover:text-primary transition-colors duration-200" href="catalogo.html">Catálogo</a>
+                    <a class="text-secondary font-button text-button hover:text-primary transition-colors duration-200" href="catalogo.html?categoria=Libros">Libros</a>
+                    <a class="text-secondary font-button text-button hover:text-primary transition-colors duration-200" href="catalogo.html?categoria=Electrónica">Electrónica</a>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative group">
+                    <a href="carrito.html" class="flex items-center p-2 text-primary border-b-2 border-primary font-bold pb-1 transition-transform duration-100 active:scale-95">
+                        <span class="material-symbols-outlined mr-1">shopping_cart</span>
+                        <span class="absolute -top-1 -right-1 bg-primary text-on-primary text-[10px] w-4 h-4 rounded-full flex items-center justify-center cart-counter">0</span>
+                    </a>
+                </div>
+                <button class="p-2 text-secondary hover:text-primary transition-colors duration-200">
+                    <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg fade-in-up">
+        <header class="mb-stack-lg">
+            <h1 class="font-display-lg text-headline-md md:text-display-lg text-on-background mb-stack-sm">Carrito de Compras</h1>
+            <p class="text-secondary font-body-md">Revisa tus artículos antes de confirmar la solicitud.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+            <section class="lg:col-span-8 space-y-gutter">
+                <div class="space-y-4" id="cart-items"></div>
+
+                <div class="hidden py-20 flex flex-col items-center justify-center text-center fade-in-up" id="empty-cart">
+                    <span class="material-symbols-outlined text-6xl text-outline-variant mb-4">shopping_basket</span>
+                    <h2 class="font-headline-md text-headline-md text-on-background">Tu carrito está vacío</h2>
+                    <p class="text-secondary max-w-sm mt-2 mb-8">Parece que aún no has añadido nada a tu carrito. Explora el mercado para encontrar libros, electrónica y más.</p>
+                    <a class="bg-primary text-on-primary font-button text-button px-8 py-3 rounded-lg hover:bg-primary-container transition-all shadow-sm" href="catalogo.html">Empezar a Comprar</a>
+                </div>
+            </section>
+
+            <aside class="lg:col-span-4 cart-summary-slide" id="order-summary">
+                <div class="bg-surface-container-low border border-outline-variant p-6 sticky top-24 rounded-lg">
+                    <h2 class="font-headline-sm text-headline-sm text-on-surface mb-6 border-b border-outline-variant pb-4">Resumen de Solicitud</h2>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-secondary font-body-md">Subtotal</span>
+                            <span class="text-on-surface font-semibold" id="summary-subtotal">S/ 0.00</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-secondary font-body-md flex items-center gap-1">
+                                Envío <span class="material-symbols-outlined text-sm cursor-help" title="Recojo gratuito en el campus">info</span>
+                            </span>
+                            <span class="text-green-700 font-label-md font-bold">GRATIS (RECOJO EN CAMPUS)</span>
+                        </div>
+                        <div class="flex justify-between items-center border-t border-outline-variant pt-4">
+                            <span class="font-headline-sm text-headline-sm text-on-surface">Total</span>
+                            <span class="font-headline-sm text-headline-sm text-primary" id="summary-total">S/ 0.00</span>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <button onclick="procesarCompra()" class="w-full bg-primary text-on-primary font-button text-button py-4 rounded transition-all hover:scale-[1.02] hover:bg-primary-container active:scale-95 shadow-md flex items-center justify-center gap-2">
+                            Proceder con la Solicitud <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                        <p class="text-[10px] text-center text-secondary uppercase tracking-widest font-label-md">Facturación Segura Universitaria</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+ <footer class="bg-secondary-container border-t border-outline-variant py-stack-lg">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+
+            <div class="col-span-1 md:col-span-1">
+
+                <a class="font-display-lg text-headline-sm font-bold text-on-secondary-container block mb-4" href="#">UTP Marketplace</a>
+
+                <p class="font-body-sm text-body-sm text-on-secondary-container opacity-80">La plataforma oficial para el intercambio de material académico en la UTP.</p>
+
+            </div>
+
+            <div class="flex flex-col gap-3">
+
+                <h4 class="font-label-md text-label-md text-on-secondary-container font-bold uppercase tracking-wider mb-2">Comunidad</h4>
+
+                <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-all" href="#">Sobre Nosotros</a>
+
+                <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-all" href="#">Normativas de la UTP</a>
+
+            </div>
+
+            <div class="flex flex-col gap-3">
+
+                <h4 class="font-label-md text-label-md text-on-secondary-container font-bold uppercase tracking-wider mb-2">Legal</h4>
+
+                <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-all" href="#">Términos de Servicio</a>
+
+                <a class="font-body-sm text-body-sm text-on-secondary-container hover:text-primary transition-all" href="#">Política de Privacidad</a>
+
+            </div>
+
+        </div>
+
+        <div class="max-w-container-max mx-auto px-margin-desktop mt-12 pt-8 border-t border-outline-variant/30 text-center">
+
+            <p class="font-body-sm text-body-sm text-on-secondary-container opacity-60">© 2026 UTP Marketplace. Impulsado por la Comunidad Universitaria.</p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
