@@ -32,11 +32,14 @@ UTP Marketplace es una plataforma web desarrollada para la comunidad universitar
 │   └── _layout.scss     
 │   └── _mixins.scss     
 │   └── _variables.scss     
-│   └── _animaciones.scss     
+│   └── _animaciones.scss   
+
 ├── css/
 │   └── main.css         
+
 ├── js/
 │   └── app.js           # Lógica principal, base de datos y funciones
+
 ├── index.html           # Página principal
 ├── catalogo.html        # Página de listado de productos
 ├── producto.html        # Página de detalle individual
@@ -45,5 +48,7 @@ UTP Marketplace es una plataforma web desarrollada para la comunidad universitar
 #Integrantes
 
 +VELIZ CARRASCO, Sergio Rodrigo (U23253061)
+
 +JUSTO APAZA, Geordan Jesus (U22248371)
+
 +ROMERO CHIRINOS, Gabriela Ysabel (U23239800)
