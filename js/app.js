@@ -1,4 +1,3 @@
-// 1. BASE DE DATOS SIMULADA
 const baseDeDatosProductos = [
     {
         id: 1,
@@ -32,24 +31,19 @@ const baseDeDatosProductos = [
     }
 ];
 
-// 2. INICIALIZACIÓN DE LA PÁGINA
 document.addEventListener('DOMContentLoaded', () => {
     actualizarContador();
-    actualizarMenuActivo(); // Marcamos el menú según la URL
+    actualizarMenuActivo();
     
-    // Si estamos en la página del carrito
     if (document.getElementById('cart-items')) renderizarCarrito();
 
-    // Lógica para detalle de producto (producto.html)
     const params = new URLSearchParams(window.location.search);
     const idProducto = params.get('id');
     if (idProducto) cargarDetalleProducto(parseInt(idProducto));
 
-    // Lógica para filtrado de catálogo (catalogo.html)
     if (document.getElementById('contenedor-productos')) filtrarCatalogo();
 });
 
-// 3. LÓGICA DE DETALLE DE PRODUCTO
 function cargarDetalleProducto(id) {
     const productoActual = baseDeDatosProductos.find(prod => prod.id === id);
     if (!productoActual) return;
@@ -61,7 +55,6 @@ function cargarDetalleProducto(id) {
     if(document.getElementById('prod-estado')) document.getElementById('prod-estado').textContent = productoActual.estado;
     if(document.getElementById('prod-descripcion')) document.getElementById('prod-descripcion').textContent = productoActual.descripcion;
     
-    // Migas de pan de categoría dinámicas
     const migaCat = document.getElementById('prod-migas-categoria');
     if(migaCat) {
         migaCat.textContent = productoActual.categoria;
@@ -80,7 +73,6 @@ function cargarDetalleProducto(id) {
     }
 }
 
-// 4. LÓGICA DE FILTRADO PARA CATÁLOGO
 function filtrarCatalogo() {
     const contenedor = document.getElementById('contenedor-productos');
     if (!contenedor) return;
@@ -104,7 +96,6 @@ function filtrarCatalogo() {
     `).join('') || `<p class="p-4 text-secondary">No se encontraron productos.</p>`;
 }
 
-// 5. LÓGICA DE INTERFAZ Y CARRITO
 function actualizarMenuActivo() {
     const params = new URLSearchParams(window.location.search);
     const cat = params.get('categoria');
@@ -224,29 +215,24 @@ function procesarCompra() {
 }
 function actualizarMenuActivo() {
     const urlParams = new URLSearchParams(window.location.search);
-    const categoriaActual = urlParams.get('categoria'); // Ejemplo: "Libros"
+    const categoriaActual = urlParams.get('categoria');
     
-    // Seleccionamos todos los enlaces del nav
     const enlacesMenu = document.querySelectorAll('nav a');
     
     enlacesMenu.forEach(enlace => {
-        // Quitamos la clase activa de todos primero
         enlace.classList.remove('text-primary', 'border-b-2', 'border-primary', 'font-bold');
         enlace.classList.add('text-secondary');
 
-        // Si el texto del enlace coincide con la categoría de la URL, lo marcamos
         if (categoriaActual && enlace.textContent.trim() === categoriaActual) {
             enlace.classList.add('text-primary', 'border-b-2', 'border-primary', 'font-bold');
             enlace.classList.remove('text-secondary');
         } else if (!categoriaActual && enlace.textContent.trim() === 'Catálogo') {
-            // Si no hay filtro, marcamos "Catálogo" por defecto
             enlace.classList.add('text-primary', 'border-b-2', 'border-primary', 'font-bold');
             enlace.classList.remove('text-secondary');
         }
     });
 }
 
-// Llama a esta función al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
     actualizarMenuActivo();
     });
