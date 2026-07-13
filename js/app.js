@@ -38,16 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
     actualizarContador();
     actualizarMenuActivo();
     
-    // Rutas protegidas y vistas condicionales
+    
     if (document.getElementById('cart-items')) renderizarCarrito();
     if (document.getElementById('contenedor-productos')) filtrarCatalogo();
-    if (document.getElementById('contenedor-destacados')) cargarDestacados(); // INYECTA EN INDEX.HTML
+    if (document.getElementById('contenedor-destacados')) cargarDestacados(); 
 
     const params = new URLSearchParams(window.location.search);
     const idProducto = params.get('id');
     if (idProducto) cargarDetalleProducto(parseInt(idProducto));
 
-    // Formulario Admin
+    
     const formAdmin = document.getElementById('form-admin');
     if (formAdmin) formAdmin.onsubmit = manejarEnvioAdmin;
 });
@@ -60,7 +60,7 @@ async function cargarDestacados() {
     if (!contenedor) return;
 
     const productos = await obtenerProductosDesdeAPI();
-    const destacados = productos.slice(0, 3); // Solo toma los 3 primeros para el inicio
+    const destacados = productos.slice(0, 3);
 
     contenedor.innerHTML = destacados.map(p => `
         <div class="product-card group bg-white border border-outline-variant cursor-pointer p-4 hover:shadow-lg transition-shadow" onclick="window.location.href='producto.html?id=${p.id}'">
