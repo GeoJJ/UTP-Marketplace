@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Panel de Administración | UTP Marketplace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: { 
+            extend: { 
+              "colors": { "primary": "#82001e", "primary-container": "#a71930", "on-primary": "#ffffff", "surface": "#f8f9fb", "on-surface": "#191c1e", "outline-variant": "#e1bebe", "secondary": "#635d5a", "surface-container-lowest": "#ffffff" }, 
+              "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem" }, 
+              "spacing": { "stack-sm": "0.5rem", "margin-mobile": "1rem", "container-max": "1280px", "stack-md": "1rem", "stack-lg": "2rem", "margin-desktop": "2.5rem", "gutter": "1.5rem" } 
+            } 
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
+    
+    <!-- Barra de Navegación del Admin -->
+    <nav class="bg-primary text-on-primary shadow-md sticky top-0 z-50">
+        <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+                <div>
+                    <h1 class="font-display-lg text-headline-sm font-bold leading-tight">UTP Admin Panel</h1>
+                    <p class="text-[10px] font-label-md tracking-widest uppercase opacity-80">Gestión de Base de Datos</p>
+                </div>
+            </div>
+            
+            <button onclick="cerrarSesion()" class="flex items-center gap-2 bg-primary-container hover:bg-white hover:text-primary px-4 py-2 rounded transition-colors font-button text-sm border border-transparent hover:border-primary">
+                <span class="material-symbols-outlined text-[18px]">logout</span> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main class="flex-grow w-full max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg fade-in-up">
+        
+        <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+            <div class="border-b border-outline-variant p-6 bg-gray-50 flex items-center justify-between">
+                <div>
+                    <h2 class="font-headline-md text-headline-md font-bold text-on-surface">Agregar Nuevo Producto</h2>
+                    <p class="text-secondary text-sm mt-1">Los datos ingresados se guardarán directamente en PostgreSQL.</p>
+                </div>
+                <span class="material-symbols-outlined text-4xl text-outline-variant">database</span>
+            </div>
+
+            <form id="form-admin" class="p-8 space-y-6">
+                
+                <!-- 1. Nombre y Precio (2 Columnas) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-nombre">Nombre del Producto</label>
+                        <input type="text" id="p-nombre" placeholder="Ej. Calculadora Científica" class="w-full border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required>
+                    </div>
+                    <div>
+                        <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-precio">Precio (S/)</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-3 text-secondary font-bold">S/</span>
+                            <input type="number" step="0.01" id="p-precio" placeholder="0.00" class="w-full pl-10 border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Categoría y Estado (2 Columnas) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-cat">Categoría</label>
+                        <select id="p-cat" class="w-full border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary outline-none transition-all cursor-pointer bg-white" required>
+                            <option value="" disabled selected>Selecciona una categoría...</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Libros">Libros</option>
+                            <option value="Proyectos">Proyectos</option>
+                            <option value="Servicios">Servicios</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-estado">Estado del Artículo</label>
+                        <select id="p-estado" class="w-full border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary outline-none transition-all cursor-pointer bg-white" required>
+                            <option value="" disabled selected>Selecciona el estado...</option>
+                            <option value="NUEVO">Nuevo (Sellado)</option>
+                            <option value="COMO NUEVO">Como Nuevo (Poco uso)</option>
+                            <option value="USADO">Usado (Con detalles)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 3. URL de Imagen -->
+                <div>
+                    <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-img">URL de la Imagen</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-3 text-secondary">link</span>
+                        <input type="url" id="p-img" placeholder="https://ejemplo.com/imagen.jpg" class="w-full pl-10 border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required>
+                    </div>
+                    <p class="text-xs text-secondary mt-2">Usa enlaces directos a imágenes (Unsplash, Imgur, etc.) para que se visualicen correctamente en el catálogo.</p>
+                </div>
+
+                <!-- 4. Descripción -->
+                <div>
+                    <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-desc">Descripción Detallada</label>
+                    <textarea id="p-desc" rows="4" placeholder="Describe las características, estado y detalles de entrega..." class="w-full border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" required></textarea>
+                </div>
+
+                <!-- Botón de Envío -->
+                <div class="pt-4 border-t border-outline-variant">
+                    <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-4 rounded-lg hover:bg-primary-container active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">save</span> Guardar Producto en Base de Datos
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts de Protección y Lógica -->
+    <script>
+        // 1. Protección de ruta: Si no hay token, lo expulsa al login
+        if (!localStorage.getItem('admin_token')) {
+            window.location.href = 'login.html';
+        }
+
+        // 2. Función para cerrar sesión
+        function cerrarSesion() {
+            localStorage.removeItem('admin_token');
+            window.location.href = 'index.html';
+        }
+    </script>
+    
+    <!-- Conexión con el Backend (Manejo del POST) -->
+    <script src="js/app.js"></script>
+</body>
+</html> 

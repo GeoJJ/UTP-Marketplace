@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Acceso Administrativo | UTP Marketplace</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: { 
+            extend: { 
+              "colors": { "primary": "#82001e", "primary-container": "#a71930", "on-primary": "#ffffff", "surface": "#f8f9fb", "on-surface": "#191c1e", "outline-variant": "#e1bebe", "secondary": "#635d5a", "surface-container-lowest": "#ffffff" }, 
+              "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem" }, 
+              "spacing": { "stack-sm": "0.5rem", "margin-mobile": "1rem", "container-max": "1280px", "stack-md": "1rem", "stack-lg": "2rem", "margin-desktop": "2.5rem", "gutter": "1.5rem" } 
+            } 
+          }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col items-center justify-center p-4">
+    
+    <a href="index.html" class="absolute top-8 left-8 flex items-center gap-2 text-secondary hover:text-primary transition-colors font-button">
+        <span class="material-symbols-outlined text-[20px]">arrow_back</span>
+        Volver al Marketplace
+    </a>
+
+    <main class="w-full max-w-md bg-surface-container-lowest border border-outline-variant rounded-xl shadow-lg overflow-hidden fade-in-up">
+        
+        <div class="bg-primary p-6 text-center">
+            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
+                <span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+            </div>
+            <h1 class="font-display-lg text-headline-sm font-bold text-on-primary">Acceso Administrativo</h1>
+            <p class="text-primary-container text-label-md mt-1 font-label-md tracking-wider">SISTEMA INTERNO UTP</p>
+        </div>
+
+        <div class="p-8">
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="email">Correo Institucional</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-3 text-secondary text-[20px]">mail</span>
+                        <input type="email" id="email" placeholder="admin@utp.edu.pe" class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="password">Contraseña</label>
+                    <div class="relative">
+                        <span class="material-symbols-outlined absolute left-3 top-3 text-secondary text-[20px]">lock</span>
+                        <input type="password" id="password" placeholder="••••••••" class="w-full pl-10 pr-4 py-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" required>
+                    </div>
+                </div>
+
+                <div id="error-msg" class="hidden bg-red-100 text-red-800 p-3 rounded-lg text-sm font-body-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">error</span>
+                    Credenciales incorrectas.
+                </div>
+
+                <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-3 rounded-lg hover:bg-primary-container active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
+                    Ingresar al Sistema <span class="material-symbols-outlined text-[20px]">login</span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="mt-8 text-center text-secondary font-label-md text-label-md uppercase tracking-wider">
+        © 2026 UTP Marketplace - Uso exclusivo para personal autorizado
+    </footer>
+
+    <script>
+        document.getElementById('login-form').onsubmit = (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (email === 'admin@utp.edu.pe' && password === 'admin123') {
+                errorMsg.classList.add('hidden');
+                localStorage.setItem('admin_token', 'true');
+                window.location.href = 'admin.html';
+            } else {
+                errorMsg.classList.remove('hidden');
+                const formContainer = document.querySelector('main');
+                formContainer.classList.add('animate-pulse');
+                setTimeout(() => formContainer.classList.remove('animate-pulse'), 500);
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('admin_token')) {
+                window.location.href = 'admin.html';
+            }
+        });
+    </script>
+</body>
+</html>
