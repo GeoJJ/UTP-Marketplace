@@ -1,11 +1,6 @@
-// ==========================================================
-// 1. CONFIGURACIÓN DE CONEXIÓN
-// ==========================================================
+
 const API_URL = 'http://localhost:8082/api/products';
 
-// ==========================================================
-// 2. LÓGICA DE API (COMUNICACIÓN CON JAVA/POSTGRES)
-// ==========================================================
 async function obtenerProductosDesdeAPI() {
     try {
         const respuesta = await fetch(API_URL);
@@ -31,9 +26,6 @@ async function guardarProductoEnAPI(nuevoProducto) {
     }
 }
 
-// ==========================================================
-// 3. INICIALIZACIÓN
-// ==========================================================
 document.addEventListener('DOMContentLoaded', () => {
     actualizarContador();
     actualizarMenuActivo();
@@ -52,9 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formAdmin) formAdmin.onsubmit = manejarEnvioAdmin;
 });
 
-// ==========================================================
-// 4. LÓGICA DE VISTAS (INDEX Y CATÁLOGO)
-// ==========================================================
 async function cargarDestacados() {
     const contenedor = document.getElementById('contenedor-destacados');
     if (!contenedor) return;
@@ -149,9 +138,6 @@ async function manejarEnvioAdmin(event) {
     }
 }
 
-// ==========================================================
-// 5. LÓGICA DEL CARRITO Y MENU (Persistencia Local)
-// ==========================================================
 function agregarAlCarrito(id, nombre, precio, categoria, imagen) {
     let carrito = JSON.parse(localStorage.getItem('utp_cart')) || [];
     let item = carrito.find(i => i.id === id);
