@@ -23,7 +23,6 @@
 </head>
 <body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col">
     
-    <!-- Barra de Navegación del Admin -->
     <nav class="bg-primary text-on-primary shadow-md sticky top-0 z-50">
         <div class="flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-20">
             <div class="flex items-center gap-3">
@@ -40,7 +39,6 @@
         </div>
     </nav>
 
-    <!-- Contenedor Principal -->
     <main class="flex-grow w-full max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg fade-in-up">
         
         <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
@@ -54,7 +52,6 @@
 
             <form id="form-admin" class="p-8 space-y-6">
                 
-                <!-- 1. Nombre y Precio (2 Columnas) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-nombre">Nombre del Producto</label>
@@ -69,7 +66,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Categoría y Estado (2 Columnas) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-cat">Categoría</label>
@@ -92,7 +88,6 @@
                     </div>
                 </div>
 
-                <!-- 3. URL de Imagen -->
                 <div>
                     <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-img">URL de la Imagen</label>
                     <div class="relative">
@@ -102,13 +97,11 @@
                     <p class="text-xs text-secondary mt-2">Usa enlaces directos a imágenes (Unsplash, Imgur, etc.) para que se visualicen correctamente en el catálogo.</p>
                 </div>
 
-                <!-- 4. Descripción -->
                 <div>
                     <label class="block font-label-md text-label-md text-secondary mb-2 uppercase" for="p-desc">Descripción Detallada</label>
                     <textarea id="p-desc" rows="4" placeholder="Describe las características, estado y detalles de entrega..." class="w-full border border-outline-variant p-3 rounded focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" required></textarea>
                 </div>
 
-                <!-- Botón de Envío -->
                 <div class="pt-4 border-t border-outline-variant">
                     <button type="submit" class="w-full bg-primary text-on-primary font-button text-button py-4 rounded-lg hover:bg-primary-container active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
                         <span class="material-symbols-outlined">save</span> Guardar Producto en Base de Datos
@@ -118,21 +111,17 @@
         </div>
     </main>
 
-    <!-- Scripts de Protección y Lógica -->
     <script>
-        // 1. Protección de ruta: Si no hay token, lo expulsa al login
         if (!localStorage.getItem('admin_token')) {
             window.location.href = 'login.html';
         }
 
-        // 2. Función para cerrar sesión
         function cerrarSesion() {
             localStorage.removeItem('admin_token');
             window.location.href = 'index.html';
         }
     </script>
     
-    <!-- Conexión con el Backend (Manejo del POST) -->
     <script src="js/app.js"></script>
 </body>
 </html> 
